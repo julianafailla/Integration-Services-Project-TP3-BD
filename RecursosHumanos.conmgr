@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="RecursosHumanos"
+  DTS:DTSID="{D50BBA01-FFF5-46A6-B9A0-7BE25AB397BF}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=LAPTOP-MFV6MCLC\SQLEXPRESS;Initial Catalog=RecursosHumanos;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Integration Services Project TP3 BD-{D50BBA01-FFF5-46A6-B9A0-7BE25AB397BF}LAPTOP-MFV6MCLC\SQLEXPRESS.RecursosHumanos;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="FacturacionVentas"
+  DTS:DTSID="{E6DC8295-89F4-4F2A-B6A9-99957B079997}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=LAPTOP-MFV6MCLC\SQLEXPRESS;Initial Catalog=FacturacionVentas;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-Integration Services Project TP3 BD-{E6DC8295-89F4-4F2A-B6A9-99957B079997}LAPTOP-MFV6MCLC\SQLEXPRESS.FacturacionVentas;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
