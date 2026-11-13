@@ -11,8 +11,8 @@
   DTS:LocaleID="11274"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="19"
-  DTS:VersionGUID="{06A4556D-A609-4295-81E9-06B7D41B6D9E}">
+  DTS:VersionBuild="20"
+  DTS:VersionGUID="{996231B9-8614-49F9-A3C7-13322B3E8A63}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -511,28 +511,39 @@
                   dataType="System.String"
                   description="The SQL command to be executed."
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
-    v.Id_vendedor AS Id_vendedor,
-    ISNULL(v.Nombre, e.nombre + ' ' + e.apellido) AS Nombre,
-    v.Direccion AS Direccion,
-    v.Telefono AS Telefono,
-    v.Especialidad AS Especialidad,
-    DATEDIFF(YEAR, e.fecha_ingreso, GETDATE()) AS Antiguedad_Anios,
-    e.sueldo AS Sueldo_Actual,
-    ISNULL(c.Total_Horas, 0) AS Total_Horas_Capacitacion
-FROM FacturacionVentas.dbo.Vendedores v
-INNER JOIN RecursosHumanos.dbo.Empleado e 
-    ON v.Id_vendedor = (e.legajo - 99) -- Mapeo entre Id_vendedor (1+) y Legajo (100+)
-LEFT JOIN (
-    SELECT 
-        cxe.legajo, 
-        SUM(c.duracion_horas) AS Total_Horas
-    FROM RecursosHumanos.dbo.CapacitacionXEmpleado cxe
-    INNER JOIN RecursosHumanos.dbo.Capacitacion c 
-        ON cxe.id_capacitacion = c.id_capacitacion
-    WHERE cxe.resultado = 'Aprobado'
-    GROUP BY cxe.legajo
-) c ON e.legajo = c.legajo;</property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">WITH Candidatos AS (
+    SELECT v.Id_vendedor, e.legajo, e.sueldo, e.fecha_ingreso,
+           COUNT(*) OVER (PARTITION BY v.Id_vendedor) AS PorVendedor,
+           COUNT(*) OVER (PARTITION BY e.legajo) AS PorEmpleado
+    FROM FacturacionVentas.dbo.Vendedores AS v
+    INNER JOIN RecursosHumanos.dbo.Empleado AS e
+        ON LTRIM(RTRIM(v.Nombre)) COLLATE Latin1_General_CI_AI
+         = CONCAT(LTRIM(RTRIM(e.nombre)), ' ', LTRIM(RTRIM(e.apellido))) COLLATE Latin1_General_CI_AI
+),
+Correspondencias AS (
+    SELECT Id_vendedor, legajo, sueldo, fecha_ingreso
+    FROM Candidatos
+    WHERE PorVendedor = 1 AND PorEmpleado = 1
+),
+Horas AS (
+    SELECT ce.legajo, SUM(c.duracion_horas) AS Total
+    FROM RecursosHumanos.dbo.CapacitacionXEmpleado AS ce
+    INNER JOIN RecursosHumanos.dbo.Capacitacion AS c
+        ON c.id_capacitacion = ce.id_capacitacion
+    WHERE ce.resultado = 'Aprobado'
+      AND c.fecha_inicio &lt;= CONVERT(date, GETDATE())
+    GROUP BY ce.legajo
+)
+SELECT v.Id_vendedor, v.Nombre, v.Direccion, v.Telefono, v.Especialidad,
+    CAST(m.sueldo AS decimal(12,2)) AS Sueldo_Actual,
+    DATEDIFF(YEAR, m.fecha_ingreso, hoy.Fecha)
+      - CASE WHEN DATEADD(YEAR, DATEDIFF(YEAR, m.fecha_ingreso, hoy.Fecha), m.fecha_ingreso)
+                    &gt; hoy.Fecha THEN 1 ELSE 0 END AS Antiguedad_Anios,
+    CASE WHEN m.legajo IS NOT NULL THEN ISNULL(h.Total, 0) END AS Total_Horas_Capacitacion
+FROM FacturacionVentas.dbo.Vendedores AS v
+LEFT JOIN Correspondencias AS m ON m.Id_vendedor = v.Id_vendedor
+LEFT JOIN Horas AS h ON h.legajo = m.legajo
+CROSS JOIN (SELECT CONVERT(date, GETDATE()) AS Fecha) AS hoy;</property>
                 <property
                   dataType="System.String"
                   description="The variable that contains the SQL command to be executed."

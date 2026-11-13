@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>Integration Services Project TP3 BD</Name>
-    <LastWriteTime>2026-11-11T12:05:59.8208244Z</LastWriteTime>
+    <LastWriteTime>2026-11-13T00:59:01.8636561Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -18,12 +18,12 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>ETL_DimVendedor.dtsx</Name>
-      <LastWriteTime>2026-11-12T17:07:58.8416933Z</LastWriteTime>
+      <LastWriteTime>2026-11-13T01:20:23.7532592Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>ETL_DimDistribucionGeografica.dtsx</Name>
-      <LastWriteTime>2026-11-12T17:53:58.4999356Z</LastWriteTime>
+      <LastWriteTime>2026-11-13T01:27:58.8995053Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
@@ -38,12 +38,12 @@
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>ETL_FactVentas.dtsx</Name>
-      <LastWriteTime>2026-11-12T17:54:29.2219289Z</LastWriteTime>
+      <LastWriteTime>2026-11-13T01:21:25.8183301Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>ETL_FactRRHH.dtsx</Name>
-      <LastWriteTime>2026-11-12T17:59:02.4650911Z</LastWriteTime>
+      <LastWriteTime>2026-11-13T01:22:25.4391948Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

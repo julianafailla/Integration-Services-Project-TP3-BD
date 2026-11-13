@@ -11,8 +11,8 @@
   DTS:LocaleID="11274"
   DTS:ObjectName="Package1"
   DTS:PackageType="5"
-  DTS:VersionBuild="38"
-  DTS:VersionGUID="{6C828CBC-0417-453B-8F9D-D8D17844E89C}">
+  DTS:VersionBuild="39"
+  DTS:VersionGUID="{E51E7C99-6D17-40B8-A0DD-DC1ADED92D76}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -47,13 +47,12 @@
           <components>
             <component
               refId="Package\Data Flow Task\Insertar destino 1"
-              componentClassID="Microsoft.OLEDBDestination"
-              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
-              description="OLE DB Destination"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
               name="Insertar destino 1"
               usesDispositions="true"
-              validateExternalMetadata="False"
-              version="4">
+              version="2">
               <properties>
                 <property
                   dataType="System.Int32"
@@ -61,46 +60,14 @@
                   name="CommandTimeout">0</property>
                 <property
                   dataType="System.String"
-                  description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">[dbo].[Dim_Geografia]</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies the variable that contains the name of the database object used to open a rowset."
-                  name="OpenRowsetVariable"></property>
-                <property
-                  dataType="System.String"
                   description="The SQL command to be executed."
+                  expressionType="Notify"
                   name="SqlCommand"
-                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">INSERT dbo.Dim_Geografia (Clasificacion, Id_depto, Nom_ciudad, Nom_depto, Poblacion, Zona, Id_ciudad) VALUES (?, ?, ?, ?, ?, ?, ?)</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the column code page to use when code page information is unavailable from the data source."
                   name="DefaultCodePage">1252</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Forces the use of the DefaultCodePage property value when describing character data."
-                  name="AlwaysUseDefaultCodePage">false</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies the mode used to access the database."
-                  name="AccessMode"
-                  typeConverter="AccessMode">3</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepIdentity">false</property>
-                <property
-                  dataType="System.Boolean"
-                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
-                  name="FastLoadKeepNulls">false</property>
-                <property
-                  dataType="System.String"
-                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
-                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
-                <property
-                  dataType="System.Int32"
-                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
-                  name="FastLoadMaxInsertCommitSize">2147483647</property>
               </properties>
               <connections>
                 <connection
@@ -112,126 +79,178 @@
               </connections>
               <inputs>
                 <input
-                  refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input]"
-                  errorOrTruncationOperation="Insert"
+                  refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
                   errorRowDisposition="FailComponent"
                   hasSideEffects="true"
-                  name="OLE DB Destination Input">
+                  name="OLE DB Command Input">
                   <inputColumns>
                     <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[IdCiudad]"
-                      cachedDataType="i4"
-                      cachedName="IdCiudad"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Id_ciudad]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IdCiudad]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[Nom_Ciudad]"
-                      cachedCodepage="1252"
-                      cachedDataType="str"
-                      cachedLength="100"
-                      cachedName="Nom_Ciudad"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Nom_ciudad]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Nom_Ciudad]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[Poblacion]"
-                      cachedDataType="i4"
-                      cachedName="Poblacion"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Poblacion]"
-                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Poblacion]" />
-                    <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[Clasificacion]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[Clasificacion]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="50"
                       cachedName="Clasificacion"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Clasificacion]"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Clasificacion]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[IdDepto_BK]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[IdCiudad]"
+                      cachedDataType="i4"
+                      cachedName="IdCiudad"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IdCiudad]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[IdDepto_BK]"
                       cachedDataType="i4"
                       cachedName="IdDepto_BK"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Id_depto]"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[IdDepto_BK]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[Nom_Depto]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[Nom_Ciudad]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="Nom_Ciudad"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Nom_Ciudad]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[Nom_Depto]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="100"
                       cachedName="Nom_Depto"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Nom_depto]"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Nom_Depto]" />
                     <inputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].Columns[Zona]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[Poblacion]"
+                      cachedDataType="i4"
+                      cachedName="Poblacion"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Poblacion]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].Columns[Zona]"
                       cachedCodepage="1252"
                       cachedDataType="str"
                       cachedLength="100"
                       cachedName="Zona"
-                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Zona]"
+                      externalMetadataColumnId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
                       lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Zona]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[SK_Geografia]"
-                      dataType="i4"
-                      name="SK_Geografia" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Id_ciudad]"
-                      dataType="i4"
-                      name="Id_ciudad" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Nom_ciudad]"
-                      codePage="1252"
-                      dataType="str"
-                      length="100"
-                      name="Nom_ciudad" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Poblacion]"
-                      dataType="i4"
-                      name="Poblacion" />
-                    <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Clasificacion]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
                       codePage="1252"
                       dataType="str"
                       length="50"
-                      name="Clasificacion" />
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Id_depto]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
                       dataType="i4"
-                      name="Id_depto" />
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Nom_depto]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
                       codePage="1252"
                       dataType="str"
                       length="100"
-                      name="Nom_depto" />
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
                     <externalMetadataColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input].ExternalColumns[Zona]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_3]"
                       codePage="1252"
                       dataType="str"
                       length="100"
-                      name="Zona" />
+                      name="Param_3">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_4]"
+                      dataType="i4"
+                      name="Param_4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="Param_5">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">1</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input].ExternalColumns[Param_6]"
+                      dataType="i4"
+                      name="Param_6">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">17</property>
+                      </properties>
+                    </externalMetadataColumn>
                   </externalMetadataColumns>
                 </input>
               </inputs>
               <outputs>
                 <output
-                  refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Destination Error Output]"
+                  refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Command Error Output]"
                   exclusionGroup="1"
                   isErrorOut="true"
-                  name="OLE DB Destination Error Output"
-                  synchronousInputId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input]">
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input]">
                   <outputColumns>
                     <outputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
                       name="ErrorCode"
                       specialFlags="1" />
                     <outputColumn
-                      refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      refId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       dataType="i4"
-                      lineageId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Insertar destino 1.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
                       name="ErrorColumn"
                       specialFlags="2" />
                   </outputColumns>
@@ -961,7 +980,7 @@ INNER JOIN FacturacionVentas.dbo.Departamentos d
               startId="Package\Data Flow Task\Slowly Changing Dimension.Outputs[Changing Attribute Updates Output]" />
             <path
               refId="Package\Data Flow Task.Paths[New Output]"
-              endId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Destination Input]"
+              endId="Package\Data Flow Task\Insertar destino 1.Inputs[OLE DB Command Input]"
               name="New Output"
               startId="Package\Data Flow Task\Slowly Changing Dimension.Outputs[New Output]" />
             <path
@@ -1068,7 +1087,7 @@ INNER JOIN FacturacionVentas.dbo.Departamentos d
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-133.293372395834,29.2748091603054,71.920078125,16"
+              BoundingBox="-124.424720052084,29.2748091603054,54.1827734375,11.43359375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -1104,7 +1123,7 @@ INNER JOIN FacturacionVentas.dbo.Departamentos d
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-103.861705729167,29.2748091603054,174.390078125,16"
+              BoundingBox="-103.861705729167,29.2748091603054,157.0678125,11.6630859375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
